@@ -15,8 +15,14 @@ void main() async {
 Future<void> setupDefaultReminders() async {
   final reminders = await StorageHelper.loadReminders();
   final defaultReminders = [
-    Reminder(id: reminders.length, title: 'Dzikir Pagi', time: '07:00'),
-    Reminder(id: reminders.length + 1, title: 'Dzikir Petang', time: '17:00')
+    Reminder(
+        id: DateTime.now().millisecondsSinceEpoch,
+        title: 'Dzikir Pagi',
+        time: '07:00'),
+    Reminder(
+        id: DateTime.now().millisecondsSinceEpoch + 1,
+        title: 'Dzikir Petang',
+        time: '17:00')
   ];
 
   for (var reminder in defaultReminders) {
@@ -135,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 final Reminder newReminder = Reminder(
                   id: reminderToUpdate != null
                       ? reminderToUpdate.id
-                      : _reminders.length,
+                      : DateTime.now().millisecondsSinceEpoch,
                   title: title,
                   time: time,
                 );
